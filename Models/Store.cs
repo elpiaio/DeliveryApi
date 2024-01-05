@@ -9,29 +9,44 @@ namespace DeliveryApi.Models
         [Required]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "O titulo não pode ser nulo")]
+        [Required(ErrorMessage = "O Nome não pode ser nulo")]
         public string Name { get; set; }
-        public string Email { get; set; } 
-        public string Password { get; set; }
-        public string Description { get; set; }
-        public List<Menu> Menus { get; set; }
 
+        [Required(ErrorMessage = "O Email não pode ser nulo")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "A Senha não pode ser nulo")]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "A descrição não pode ser nulo")]
+        public string Description { get; set; }
+
+        public List<Menu> Menus { get; set; } = new List<Menu>();
+        public List<Produto> Produtos { get; set; } = new List<Produto>();
     }
     public class Menu
     {
-        public int Id { get; set; }
-        
+        [Key]
         [Required]
-        public int IdMenu { get; set; }
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "O Nome não pode ser nulo")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "A descrição não pode ser nulo")]
         public string Description { get; set; }
-        public List<Produto> Produtos { get; set; }
+        public List<Produto> Produtos { get; set; } = new List<Produto>();
+
     }
     public class Produto
     {
-        public int Id { get; set; } 
-        public int IdProduto { get; set; }
+        [Key]
+        [Required]
+        public int Id { get; set; }
+        public int MenuId { get; set; }
+
+        [Required(ErrorMessage = "O Nome não pode ser nulo")]
         public string Name { get; set; }
-        public string UrlImage { get; set; }
+        public string UrlImage { get; set; } 
     }
 }
